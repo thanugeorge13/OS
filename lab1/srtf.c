@@ -2,27 +2,23 @@
 #include <limits.h>
 
 typedef struct {
-    int id, arrival, burst, remaining, waiting, turnaround, completion, response, started;
+    int id, arrival, burst, remaining, waiting, turnaround, completion,response,started;
 } Process;
-
-void swap(Process *a, Process *b) {
-    Process temp = *a;
-    *a = *b;
-    *b = temp;
-}
 
 void sortByArrival(Process p[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
             if (p[j].arrival > p[j + 1].arrival) {
-                swap(&p[j], &p[j + 1]);
+                Process temp = p[j];
+                p[j]=p[j+1];
+                p[j+1]=temp;
             }
         }
     }
 }
 
 void sjfPreemptive(Process p[], int n) {
-    int completed = 0, time = 0, minIndex = -1, minBurst = INT_MAX;
+    int completed = 0, time = 0, minIndex, minBurst;
 
     while (completed < n) {
         minIndex = -1, minBurst = INT_MAX;
@@ -88,7 +84,6 @@ int main() {
         scanf("%d %d", &p[i].arrival, &p[i].burst);
         p[i].remaining = p[i].burst;
         p[i].waiting = p[i].turnaround = p[i].completion = p[i].response = p[i].started = 0;
-        temp[i] = p[i]; // Copy for reuse
     }
     sjfPreemptive(p, n);
     displayResults(p, n, "Shortest Job First (Preemptive)");
