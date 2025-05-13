@@ -20,7 +20,7 @@ void sortByArrival(Process p[], int n) {
 }
 
 // SJF Scheduling (Non-Preemptive)
-void sjf_non_preemptive(Process p[], int n, float *avgTAT, float *avgWT) {
+void sjf_non_preemptive(Process p[], int n) {
     int completed = 0, time = 0, minIdx, totalTAT = 0, totalWT = 0;
     int isCompleted[n];
     for (int i = 0; i < n; i++) isCompleted[i] = 0;
@@ -45,8 +45,6 @@ void sjf_non_preemptive(Process p[], int n, float *avgTAT, float *avgWT) {
         totalWT += p[minIdx].waiting;
         completed++;
     }
-    *avgTAT = (float)totalTAT / n;
-    *avgWT = (float)totalWT / n;
 }
 
 // Function to display results
@@ -54,18 +52,18 @@ void display(Process p[], int n, float avgTAT, float avgWT) {
     printf("\nPID Arrival Burst Completion Turnaround Waiting\n");
     for (int i = 0; i < n; i++) {
         printf("%3d %7d %6d %10d %10d %8d\n", p[i].id, p[i].arrival, p[i].burst, p[i].completion, p[i].turnaround, p[i].waiting);
+        totalWT += p[i].wt;
+        totalTAT += p[i].tat;
     }
-    printf("\nAverage Turnaround Time: %.2f", avgTAT);
-    printf("\nAverage Waiting Time: %.2f\n", avgWT);
+    printf("\nAverage Waiting Time: %.2f\n", totalWT / n);
+    printf("Average Turnaround Time: %.2f\n", totalTAT / n);
 }
 
 int main() {
     int n;
-    float avgTAT, avgWT;
     printf("Enter number of processes: ");
     scanf("%d", &n);
     Process p[n];
-    
     printf("Enter Arrival Time and Burst Time for each process:\n");
     for (int i = 0; i < n; i++) {
         p[i].id = i + 1;
@@ -76,6 +74,5 @@ int main() {
     printf("\nShortest Job First (Non-Preemptive) Scheduling\n");
     sjf_non_preemptive(p, n, &avgTAT, &avgWT);
     display(p, n, avgTAT, avgWT);
-    
     return 0;
 }
