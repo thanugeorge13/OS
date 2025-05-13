@@ -21,7 +21,7 @@ void sortByArrival(Process p[], int n) {
 
 // SJF Scheduling (Non-Preemptive)
 void sjf_non_preemptive(Process p[], int n) {
-    int completed = 0, time = 0, minIdx, totalTAT = 0, totalWT = 0;
+    int completed = 0, time = 0, minIdx;
     int isCompleted[n];
     for (int i = 0; i < n; i++) isCompleted[i] = 0;
     
@@ -41,8 +41,6 @@ void sjf_non_preemptive(Process p[], int n) {
         p[minIdx].waiting = p[minIdx].turnaround - p[minIdx].burst;
         time = p[minIdx].completion;
         isCompleted[minIdx] = 1;
-        totalTAT += p[minIdx].turnaround;
-        totalWT += p[minIdx].waiting;
         completed++;
     }
 }
