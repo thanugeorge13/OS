@@ -4,17 +4,13 @@ typedef struct {
     int id, at, bt, wt, tat, ct,rem,rt, started;
 } Process;
 
-void swap(Process *a, Process *b) {
-    Process temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
 void sortByArrival(Process p[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
-            if (p[j].at > p[j + 1].at) {
-                swap(&p[j], &p[j + 1]);
+            if (p[j].arrival > p[j + 1].arrival) {
+                Process temp = p[j];
+                p[j] = p[j + 1];
+                p[j + 1] = temp;
             }
         }
     }
