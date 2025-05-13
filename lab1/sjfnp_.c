@@ -48,12 +48,13 @@ void sjf_non_preemptive(Process p[], int n) {
 }
 
 // Function to display results
-void display(Process p[], int n, float avgTAT, float avgWT) {
+void display(Process p[], int n) {
     printf("\nPID Arrival Burst Completion Turnaround Waiting\n");
+    float totalWT = 0, totalTAT = 0;
     for (int i = 0; i < n; i++) {
         printf("%3d %7d %6d %10d %10d %8d\n", p[i].id, p[i].arrival, p[i].burst, p[i].completion, p[i].turnaround, p[i].waiting);
-        totalWT += p[i].wt;
-        totalTAT += p[i].tat;
+        totalWT += p[i].waiting;
+        totalTAT += p[i].turnaround;
     }
     printf("\nAverage Waiting Time: %.2f\n", totalWT / n);
     printf("Average Turnaround Time: %.2f\n", totalTAT / n);
@@ -72,7 +73,7 @@ int main() {
     }
     
     printf("\nShortest Job First (Non-Preemptive) Scheduling\n");
-    sjf_non_preemptive(p, n, &avgTAT, &avgWT);
-    display(p, n, avgTAT, avgWT);
+    sjf_non_preemptive(p, n);
+    display(p, n);
     return 0;
 }
