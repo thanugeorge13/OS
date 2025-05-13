@@ -7,7 +7,7 @@ typedef struct {
 void sortByArrival(Process p[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
-            if (p[j].arrival > p[j + 1].arrival) {
+            if (p[j].at > p[j + 1].at) {
                 Process temp = p[j];
                 p[j] = p[j + 1];
                 p[j + 1] = temp;
@@ -31,8 +31,7 @@ void fcfs(Process p[], int n) {
     }
 }
 
-void display(Process p[], int n, const char *title) {
-    printf("\n--- %s ---\n", title);
+void display(Process p[], int n) {
     printf("\nPID\tAT\tBT\tCT\tTAT\tWT\n");
 
     float totalWT = 0, totalTAT = 0;
@@ -47,22 +46,17 @@ void display(Process p[], int n, const char *title) {
 }
 
 void main() {
-    int n, choice;
-    printf("FCFS\n");
+    int n;
     printf("Enter number of processes: ");
     scanf("%d", &n);
-
-    Process p[n], temp[n];
-
-    printf("Enter Arrival Time and Burst Time:\n");
+    Process p[n];
+    printf("Enter Arrival Time and Burst Time for each process:\n");
     for (int i = 0; i < n; i++) {
         p[i].id = i + 1;
+        printf("P[%d]: ", i + 1);
         scanf("%d %d", &p[i].at, &p[i].bt);
-        p[i].rt = p[i].bt;
-        p[i].wt = p[i].tat = p[i].ct = p[i].rt = p[i].started = 0;
-        temp[i] = p[i];
     }
-    for (int i = 0; i < n; i++) p[i] = temp[i];
+    printf("First Come First Serve (FCFS)\n");
     fcfs(p, n);
-    display(p, n, "First Come First Serve (FCFS)");
+    display(p, n);
 }
