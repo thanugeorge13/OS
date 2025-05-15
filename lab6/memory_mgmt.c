@@ -18,7 +18,7 @@ void resetBlocks(struct Block blocks[], int n) {
 }
 
 void firstFit(struct Block blocks[], int n_blocks, struct File files[], int n_files) {
-    printf("\n\tMemory Management Scheme – First Fit\n");
+    printf("\n\tMemory Management Scheme â€“ First Fit\n");
     printf("File_no:\tFile_size\tBlock_no:\tBlock_size:\n");
     for (int i = 0; i < n_files; i++) {
         files[i].block_no = -1;
@@ -37,7 +37,7 @@ void firstFit(struct Block blocks[], int n_blocks, struct File files[], int n_fi
 }
 
 void bestFit(struct Block blocks[], int n_blocks, struct File files[], int n_files) {
-    printf("\n\tMemory Management Scheme – Best Fit\n");
+    printf("\n\tMemory Management Scheme â€“ Best Fit\n");
     printf("File_no:\tFile_size\tBlock_no:\tBlock_size:\n");
     for (int i = 0; i < n_files; i++) {
         int bestIdx = -1;
@@ -59,7 +59,7 @@ void bestFit(struct Block blocks[], int n_blocks, struct File files[], int n_fil
 }
 
 void worstFit(struct Block blocks[], int n_blocks, struct File files[], int n_files) {
-    printf("\n\tMemory Management Scheme – Worst Fit\n");
+    printf("\n\tMemory Management Scheme â€“ Worst Fit\n");
     printf("File_no:\tFile_size\tBlock_no:\tBlock_size:\n");
     for (int i = 0; i < n_files; i++) {
         int worstIdx = -1;
