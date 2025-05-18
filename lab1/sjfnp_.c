@@ -21,12 +21,12 @@ void sortByArrival(Process p[], int n) {
 
 // SJF Scheduling (Non-Preemptive)
 void sjf_non_preemptive(Process p[], int n) {
-    int completed = 0, time = 0, minIdx;
+    int completed = 0, time = 0;
     int isCompleted[n];
     for (int i = 0; i < n; i++) isCompleted[i] = 0;
     
     while (completed < n) {
-        minIdx = -1;
+        int minIdx = -1;
         int minBurst = INT_MAX;
         for (int i = 0; i < n; i++) {
             if (!isCompleted[i] && p[i].arrival <= time && p[i].burst < minBurst) {
