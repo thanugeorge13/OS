@@ -3,11 +3,7 @@
 #define MAX_PROCESSES 10
 
 typedef struct {
-    int id;
-    int burst_time;
-    int period;
-    int remaining_time;
-    int next_deadline;
+    int id,burst_time,period,remaining_time;
 } Process;
 
 void sort_by_period(Process processes[], int n) {
