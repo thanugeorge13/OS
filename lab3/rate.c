@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 #define MAX_PROCESSES 10
 
