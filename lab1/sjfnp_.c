@@ -6,19 +6,6 @@ typedef struct {
     int id, arrival, burst, completion, turnaround, waiting;
 } Process;
 
-// Function to sort processes based on arrival time
-void sortByArrival(Process p[], int n) {
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (p[j].arrival > p[j + 1].arrival) {
-                Process temp = p[j];
-                p[j] = p[j + 1];
-                p[j + 1] = temp;
-            }
-        }
-    }
-}
-
 // SJF Scheduling (Non-Preemptive)
 void sjf_non_preemptive(Process p[], int n) {
     int completed = 0, time = 0;
