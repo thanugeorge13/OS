@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 
-#define MAX_PROCESSES 10
-
 typedef struct {
     int id,burst_time,period,remaining_time;
 } Process;
@@ -66,7 +64,7 @@ void rate_monotonic_scheduling(Process processes[], int n) {
         return;
     }
 
-    int timeline = 0, executed = 0;
+    int timeline = 0;
     while (timeline < lcm_period) {
         int selected = -1;
         for (int i = 0; i < n; i++) {
@@ -81,7 +79,6 @@ void rate_monotonic_scheduling(Process processes[], int n) {
         if (selected != -1) {
             printf("Time %d: Process %d is running\n", timeline, processes[selected].id);
             processes[selected].remaining_time--;
-            executed++;
         } else {
             printf("Time %d: CPU is idle\n", timeline);
         }
@@ -91,18 +88,15 @@ void rate_monotonic_scheduling(Process processes[], int n) {
 
 int main() {
     int n;
-    Process processes[MAX_PROCESSES];
-
     printf("Enter the number of processes: ");
     scanf("%d", &n);
-
+    Process processes[n];
     printf("Enter the CPU burst times:\n");
     for (int i = 0; i < n; i++) {
         processes[i].id = i + 1;
         scanf("%d", &processes[i].burst_time);
         processes[i].remaining_time = processes[i].burst_time;
     }
-
     printf("Enter the time periods:\n");
     for (int i = 0; i < n; i++) {
         scanf("%d", &processes[i].period);
@@ -110,6 +104,5 @@ int main() {
 
     sort_by_period(processes, n);
     rate_monotonic_scheduling(processes, n);
-
     return 0;
 }
