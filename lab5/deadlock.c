@@ -7,9 +7,7 @@ int main() {
     printf("Enter number of processes and resources:\n");
     scanf("%d %d", &n, &m);
 
-    int allocation[n][m], request[n][m], available[m];
-    int work[m];
-    bool finish[n];
+    int allocation[n][m], request[n][m], available[m],work[m];
 
     printf("Enter allocation matrix:\n");
     for (i = 0; i < n; i++)
@@ -27,6 +25,7 @@ int main() {
         work[i] = available[i];
     }
 
+    bool finish[n];
     for (i = 0; i < n; i++) {
         bool zero_allocation = true;
         for (j = 0; j < m; j++) {
